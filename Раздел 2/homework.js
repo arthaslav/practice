@@ -142,7 +142,6 @@ if (max % 2 === 0) max -= 1;
 let count = ((max - min) / 2) + 1;
 let randIndex = Math.floor(Math.random() * count);
 let randomOdd = min + randIndex * 2;
-
 console.log(randomOdd);
 
 // -------------------------------------------------------------------------
