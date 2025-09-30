@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Задание 3 - Select</title>
+</head>
+
+<body>
+
+  <h2>Пример select из объекта</h2>
+
+  <script>
+    // Функция нормализует входные данные в массив объектов {value, label}
+    function normalizeItems(input) {
+      if (Array.isArray(input)) {
+        return input.map(i => (typeof i === 'object' ? i : { value: i, label: i }));
+      } else if (typeof input === 'object' && input !== null) {
+        return Object.keys(input).map(key => ({ value: key, label: input[key] }));
+      }
+      return [];
+    }
+
+    // Функция создаёт select
+    function createSelect(items, defaultValue) {
+      const select = document.createElement("select");
+      const normalizedItems = normalizeItems(items);
+
+      normalizedItems.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.value;
+        option.innerHTML = item.label;
+        select.append(option);
+      });
+
+      if (normalizedItems.length > 0) {
+        const values = normalizedItems.map(i => i.value);
+        select.value = values.includes(defaultValue) ? defaultValue : normalizedItems[0].value;
+      }
+
+      return select;
+    }
+
+    const myObject = {
+      value1: 'Значение 1',
+      value2: 'Значение 2',
+      value3: 'Значение 3'
+    };
+
+    const mySelect = createSelect(myObject, 'value2');
+
+    document.body.append(mySelect);
+  </script>
+
+</body>
+
+</html>
