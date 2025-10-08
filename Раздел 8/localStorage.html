@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>localStorage Practice</title>
+</head>
+
+<body>
+  <input id="text" placeholder="Введите текст">
+  <button id="save">Сохранить</button>
+  <p id="result"></p>
+
+  <script>
+    const button = document.getElementById('save');
+    const text = document.getElementById('text');
+    const result = document.getElementById('result');
+
+    function saveText() {
+      localStorage.setItem('text', JSON.stringify(text.value));
+
+      const savedText = JSON.parse(localStorage.getItem('text'));
+      console.log(savedText);
+      result.textContent = savedText;
+    }
+
+    button.addEventListener('click', saveText)
+
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('text');
+      if (saved) {
+        result.textContent = JSON.parse(saved);
+      } else {
+        result.textContent = 'Пока ничего не сохранено';
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+
+
+<!-- let todos = ['Помыть посуду', 'Сделать дз'];
+localStorage.setItem('todos', JSON.stringify(todos)); // сохраняем
+
+
+
+let saved = JSON.parse(localStorage.getItem('todos'));
+console.log(saved);
+
+
+
+
+Подсказки:
+
+Для сохранения: localStorage.setItem('message', value)
+
+Для чтения: localStorage.getItem('message') -->
